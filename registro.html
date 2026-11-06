@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Iron Gym | Registro de Cuenta</title>
+    <link rel="stylesheet" href="ESTILOC.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: var(--bg);
+            background-image: linear-gradient(rgba(10, 10, 10, 0.88), rgba(10, 10, 10, 0.94)), url('fondo.png.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 20px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 420px;
+            background-color: var(--panel);
+            border: 1px solid var(--panel-line);
+            border-radius: 12px;
+            padding: 40px 35px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .auth-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--yellow);
+            margin: 0 auto 15px auto;
+            display: block;
+            object-fit: cover;
+            background: #000;
+        }
+
+        .auth-card h1 {
+            font-size: 2rem;
+            margin: 0 0 6px 0;
+            color: var(--white);
+            letter-spacing: 0.04em;
+        }
+
+        .auth-card h1 span {
+            color: var(--yellow);
+        }
+
+        .auth-subtitulo {
+            color: var(--gray);
+            font-size: 0.92rem;
+            margin-bottom: 28px;
+        }
+
+        .form-grupo {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .form-grupo label {
+            display: block;
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-grupo input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1px solid var(--panel-line);
+            border-radius: 6px;
+            background: #1b1b1b;
+            color: var(--white);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-grupo input:focus {
+            border-color: var(--yellow);
+            box-shadow: 0 0 0 2px rgba(255, 212, 0, 0.2);
+        }
+
+        .form-grupo input::placeholder {
+            color: #666;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            background: var(--yellow);
+            color: #0a0a0a;
+            font-size: 1rem;
+            font-weight: 800;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.1s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #e6be00;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.99);
+        }
+
+        .auth-links {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-top: 1px solid var(--panel-line);
+            padding-top: 20px;
+        }
+
+        .auth-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s ease;
+        }
+
+        .auth-links a:hover {
+            color: var(--yellow);
+        }
+
+        .auth-links a.destacado {
+            color: var(--yellow);
+            font-weight: 600;
+        }
+
+        .mensaje {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .mensaje.error {
+            color: #ff8a8a;
+            background: rgba(230, 57, 70, 0.15);
+            border: 1px solid rgba(230, 57, 70, 0.4);
+        }
+
+        .mensaje.correcto {
+            color: #72f59f;
+            background: rgba(40, 167, 69, 0.15);
+            border: 1px solid rgba(40, 167, 69, 0.4);
+        }
+
+        .oculto {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="auth-card">
+        <img src="Logo.png" alt="Iron Gym Logo" class="auth-logo">
+        <h1>IRON <span>GYM</span></h1>
+        <p class="auth-subtitulo">Crear una cuenta nueva</p>
+
+        <form id="formRegistro">
+            <div class="form-grupo">
+                <label for="nuevoUsuario">Usuario</label>
+                <input type="text" id="nuevoUsuario" placeholder="Crea tu nombre de usuario" required autocomplete="username">
+            </div>
+
+            <div class="form-grupo">
+                <label for="nuevaContrasena">Contraseña</label>
+                <input type="password" id="nuevaContrasena" placeholder="Crea una contraseña segura" required autocomplete="new-password">
+            </div>
+
+            <button type="submit" class="btn-submit">Registrarme</button>
+        </form>
+
+        <p id="mensajeRegistro" class="mensaje oculto"></p>
+
+        <div class="auth-links">
+            <a href="LOGIN.html" class="destacado">¿Ya tienes una cuenta? Inicia sesión</a>
+            <a href="socios.html">Ir al Panel de Socios y Membresías</a>
+            <a href="INDEC.html">← Volver al sitio principal</a>
+        </div>
+    </div>
+
+    <script>
+        const formRegistro = document.getElementById("formRegistro");
+        const mensaje = document.getElementById("mensajeRegistro");
+
+        const campoUsuario = document.getElementById("nuevoUsuario");
+        const campoContrasena = document.getElementById("nuevaContrasena");
+
+        // USUARIO: SOLAMENTE LETRAS
+        campoUsuario.addEventListener("input", function() {
+            this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, "");
+        });
+
+        // CONTRASEÑA: SOLAMENTE NÚMEROS
+        campoContrasena.addEventListener("input", function() {
+            this.value = this.value.replace(/[^0-9]/g, "");
+        });
+
+        formRegistro.addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const usuario = campoUsuario.value.trim();
+            const contrasena = campoContrasena.value;
+
+            mensaje.textContent = "";
+            mensaje.className = "mensaje oculto";
+
+            if (usuario === "" || contrasena === "") {
+                mensaje.textContent = "Completa todos los campos.";
+                mensaje.className = "mensaje error";
+                return;
+            }
+
+            // VALIDAR QUE EL USUARIO SOLAMENTE TENGA LETRAS
+            if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]+$/.test(usuario)) {
+                mensaje.textContent = "El usuario solamente puede contener letras.";
+                mensaje.className = "mensaje error";
+                return;
+            }
+
+            // VALIDAR QUE LA CONTRASEÑA SOLAMENTE TENGA NÚMEROS
+            if (!/^[0-9]+$/.test(contrasena)) {
+                mensaje.textContent = "La contraseña solamente puede contener números.";
+                mensaje.className = "mensaje error";
+                return;
+            }
+
+            try {
+                const respuesta = await fetch("/api/registro", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        usuario: usuario,
+                        contrasena: contrasena
+                    })
+                });
+
+                const resultado = await respuesta.json();
+
+                if (resultado.ok) {
+                    mensaje.textContent = "Registro exitoso. Redirigiendo al inicio de sesión...";
+                    mensaje.className = "mensaje correcto";
+                    formRegistro.reset();
+
+                    setTimeout(function() {
+                        window.location.href = "LOGIN.html";
+                    }, 1500);
+
+                } else {
+                    mensaje.textContent = resultado.mensaje || "Error al registrar el usuario.";
+                    mensaje.className = "mensaje error";
+                }
+
+            } catch (e) {
+                mensaje.textContent = "No se pudo conectar con el servidor Node.js (¿está corriendo node servidor.js?).";
+                mensaje.className = "mensaje error";
+            }
+        });
+    </script>
+
+</body>
+</html>
+

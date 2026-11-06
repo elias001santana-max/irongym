@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Iron Gym | Iniciar Sesión</title>
+    <link rel="stylesheet" href="ESTILOC.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: var(--bg);
+            background-image: linear-gradient(rgba(10, 10, 10, 0.88), rgba(10, 10, 10, 0.94)), url('fondo.png.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 20px;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 420px;
+            background-color: var(--panel);
+            border: 1px solid var(--panel-line);
+            border-radius: 12px;
+            padding: 40px 35px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .auth-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--yellow);
+            margin: 0 auto 15px auto;
+            display: block;
+            object-fit: cover;
+            background: #000;
+        }
+
+        .auth-card h1 {
+            font-size: 2rem;
+            margin: 0 0 6px 0;
+            color: var(--white);
+            letter-spacing: 0.04em;
+        }
+
+        .auth-card h1 span {
+            color: var(--yellow);
+        }
+
+        .auth-subtitulo {
+            color: var(--gray);
+            font-size: 0.92rem;
+            margin-bottom: 28px;
+        }
+
+        .form-grupo {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .form-grupo label {
+            display: block;
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 7px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-grupo input {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1px solid var(--panel-line);
+            border-radius: 6px;
+            background: #1b1b1b;
+            color: var(--white);
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-grupo input:focus {
+            border-color: var(--yellow);
+            box-shadow: 0 0 0 2px rgba(255, 212, 0, 0.2);
+        }
+
+        .form-grupo input::placeholder {
+            color: #666;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            background: var(--yellow);
+            color: #0a0a0a;
+            font-size: 1rem;
+            font-weight: 800;
+            font-family: 'Arial Black', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.1s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: #e6be00;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.99);
+        }
+
+        .auth-links {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-top: 1px solid var(--panel-line);
+            padding-top: 20px;
+        }
+
+        .auth-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 0.88rem;
+            transition: color 0.2s ease;
+        }
+
+        .auth-links a:hover {
+            color: var(--yellow);
+        }
+
+        .auth-links a.destacado {
+            color: var(--yellow);
+            font-weight: 600;
+        }
+
+        .mensaje {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .mensaje.error {
+            color: #ff8a8a;
+            background: rgba(230, 57, 70, 0.15);
+            border: 1px solid rgba(230, 57, 70, 0.4);
+        }
+
+        .mensaje.correcto {
+            color: #72f59f;
+            background: rgba(40, 167, 69, 0.15);
+            border: 1px solid rgba(40, 167, 69, 0.4);
+        }
+
+        .oculto {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- TARJETA DE LOGIN -->
+    <div class="auth-card" id="login">
+        <img src="Logo.png" alt="Iron Gym Logo" class="auth-logo">
+        <h1>IRON <span>GYM</span></h1>
+        <p class="auth-subtitulo">Inicia sesión en tu cuenta</p>
+
+        <form id="formulario">
+            <div class="form-grupo">
+                <label for="usuario">Usuario</label>
+                <input type="text" id="usuario" placeholder="Ingresa tu usuario" required autocomplete="username">
+            </div>
+
+            <div class="form-grupo">
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" placeholder="Ingresa tu contraseña" required autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="btn-submit">Iniciar Sesión</button>
+        </form>
+
+        <p id="mensaje" class="mensaje oculto"></p>
+
+        <div class="auth-links">
+            <a href="registro.html" class="destacado">¿No tienes cuenta? Regístrate aquí</a>
+            <a href="socios.html">Ir al Panel de Socios y Membresías</a>
+            <a href="INDEC.html">← Volver al sitio principal</a>
+        </div>
+    </div>
+
+    <!-- BIENVENIDA TRAS LOGIN -->
+    <div class="auth-card oculto" id="bienvenida">
+        <img src="Logo.png" alt="Iron Gym Logo" class="auth-logo">
+        <h1>¡Bienvenido!</h1>
+        <p class="auth-subtitulo">Acceso concedido a Iron Gym</p>
+
+        <p id="nombreBienvenida" style="color: var(--yellow); text-align: center; font-size: 1.2rem; font-weight: 700; margin-bottom: 25px;"></p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <a href="INDEC.html" class="btn-submit" style="text-decoration: none; display: block; padding: 14px;">Ir al Gimnasio</a>
+            <a href="socios.html" class="btn-submit" style="background: #262626; color: white; text-decoration: none; display: block; padding: 14px;">Panel de Socios</a>
+            <button onclick="cerrarSesion()" class="btn-submit" style="background: transparent; border: 1px solid var(--red); color: var(--red);">Cerrar sesión</button>
+        </div>
+    </div>
+
+    <script>
+        const formulario = document.getElementById("formulario");
+        const mensaje = document.getElementById("mensaje");
+
+        formulario.addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const usuario = document.getElementById("usuario").value.trim();
+            const contrasena = document.getElementById("contrasena").value;
+
+            mensaje.textContent = "";
+            mensaje.className = "mensaje oculto";
+
+            try {
+                const respuesta = await fetch("/api/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ usuario: usuario, contrasena: contrasena })
+                });
+
+                const resultado = await respuesta.json();
+
+                if (resultado.ok) {
+                    // Guardar usuario en sesión
+                    sessionStorage.setItem("iron_gym_usuario", resultado.usuario || usuario);
+                    window.location.href = "INDEC.html";
+                } else {
+                    mensaje.textContent = resultado.mensaje || "Usuario o contraseña incorrectos.";
+                    mensaje.className = "mensaje error";
+                }
+            } catch (e) {
+                // Modo offline o servidor local no disponible
+                mensaje.textContent = "No se pudo conectar con el servidor Node.js (¿está corriendo node servidor.js?). Puedes continuar al sitio principal o panel de socios.";
+                mensaje.className = "mensaje error";
+            }
+        });
+
+        function cerrarSesion() {
+            sessionStorage.removeItem("iron_gym_usuario");
+            document.getElementById("bienvenida").classList.add("oculto");
+            document.getElementById("login").classList.remove("oculto");
+            formulario.reset();
+            mensaje.textContent = "";
+            mensaje.className = "mensaje oculto";
+        }
+    </script>
+
+</body>
+</html>

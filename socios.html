@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iron Gym | Gestión de Socios</title>
+    <link rel="stylesheet" href="ESTILOC.css">
+    <style>
+        .modulo-socios {
+            max-width: 1050px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .tarjeta-panel {
+            background-color: var(--panel);
+            border: 1px solid var(--panel-line);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+        .encabezado-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--panel-line);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .encabezado-panel h2 {
+            margin: 0;
+            color: var(--yellow);
+            font-size: 1.8rem;
+        }
+        .user-badge {
+            background: #1f1f1f;
+            border: 1px solid var(--panel-line);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        .user-badge strong {
+            color: var(--white);
+        }
+        /* Contadores KPI */
+        .grid-kpis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .kpi-card {
+            background: #181818;
+            border: 1px solid var(--panel-line);
+            border-radius: 6px;
+            padding: 18px;
+            text-align: center;
+        }
+        .kpi-card .numero {
+            font-size: 2.2rem;
+            font-weight: 800;
+            font-family: 'Arial Black', sans-serif;
+            margin: 5px 0 0 0;
+        }
+        .kpi-card.total .numero { color: var(--white); }
+        .kpi-card.vigentes .numero { color: #28a745; }
+        .kpi-card.vencidos .numero { color: #dc3545; }
+        .kpi-card .etiqueta {
+            font-size: 0.85rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        /* Barra de búsqueda y acciones */
+        .barra-acciones {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .barra-acciones input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 16px;
+            background: #1c1c1c;
+            border: 1px solid var(--panel-line);
+            color: var(--white);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+        .barra-acciones input:focus {
+            border-color: var(--yellow);
+        }
+        /* Botones */
+        .btn-accion {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .btn-primario {
+            background: var(--yellow);
+            color: #000;
+        }
+        .btn-primario:hover {
+            background: #e6be00;
+        }
+        .btn-peligro {
+            background: transparent;
+            border: 1px solid var(--red);
+            color: var(--red);
+        }
+        .btn-peligro:hover {
+            background: var(--red);
+            color: var(--white);
+        }
+        .btn-secundario {
+            background: #2a2a2a;
+            color: var(--white);
+            border: 1px solid var(--panel-line);
+        }
+        .btn-secundario:hover {
+            background: #333;
+        }
+        /* Tabla */
+        .contenedor-tabla {
+            overflow-x: auto;
+            border: 1px solid var(--panel-line);
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+        table.tabla-socios {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        table.tabla-socios th {
+            background: #1b1b1b;
+            color: var(--gray);
+            text-align: left;
+            padding: 14px 16px;
+            border-bottom: 2px solid var(--panel-line);
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            letter-spacing: 0.05em;
+        }
+        table.tabla-socios td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--panel-line);
+        }
+        /* Formulario registro de socios */
+        .formulario-registro {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .campo-form {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .campo-form label {
+            color: var(--gray);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .campo-form input {
+            padding: 10px 14px;
+            background: #1c1c1c;
+            border: 1px solid var(--panel-line);
+            color: var(--white);
+            border-radius: 6px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+        .campo-form input:focus {
+            border-color: var(--yellow);
+        }
+        /* Vista de Login */
+        .login-box {
+            max-width: 420px;
+            margin: 60px auto;
+            padding: 35px;
+            background: var(--panel);
+            border: 1px solid var(--panel-line);
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+        .login-box h1 {
+            color: var(--yellow);
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 2rem;
+        }
+        .login-box p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+        .login-box .campo-form {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+        .login-box button {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .nav-enlace-volver {
+            color: var(--gray);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .nav-enlace-volver:hover {
+            color: var(--yellow);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="modulo-socios">
+        <a href="INDEC.html" class="nav-enlace-volver">← Volver al sitio principal</a>
+
+        <!-- VISTA DE LOGIN (formLogin) -->
+        <div id="formLoginContainer">
+            <form id="formLogin" class="login-box">
+                <img src="Logo.png" alt="Iron Gym Logo" style="width: 75px; height: 75px; border-radius: 50%; border: 2px solid var(--yellow); margin-bottom: 12px; object-fit: cover;">
+                <h1>IRON <span style="color: var(--yellow);">GYM</span></h1>
+                <p>Acceso al Panel de Socios</p>
+
+                <div class="campo-form">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" id="usuario" placeholder="Ej. admin" required>
+                </div>
+
+                <div class="campo-form">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" id="contrasena" placeholder="Contraseña" required>
+                </div>
+
+                <button type="submit" class="btn-accion btn-primario">Iniciar Sesión</button>
+            </form>
+        </div>
+
+        <!-- VISTA DEL PANEL (panelSocios) -->
+        <div id="panelSocios" style="display: none;">
+            <div class="tarjeta-panel">
+                <div class="encabezado-panel">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <img src="Logo.png" alt="Iron Gym Logo" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--yellow); object-fit: cover;">
+                        <div>
+                            <h2>Panel de Socios</h2>
+                            <div class="user-badge" data-roles="admin,recepcion">
+                                Usuario: <strong id="nombreUsuario">Administrador</strong> (<span id="rolUsuario">admin</span>)
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btnCerrarSesion" class="btn-accion btn-peligro">Cerrar Sesión</button>
+                </div>
+
+                <!-- Métricas / Contadores innovación -->
+                <div class="grid-kpis">
+                    <div class="kpi-card total">
+                        <div class="etiqueta">Total de Socios</div>
+                        <div class="numero" id="contadorTotal">0</div>
+                    </div>
+                    <div class="kpi-card vigentes">
+                        <div class="etiqueta">Membresías Vigentes</div>
+                        <div class="numero" id="contadorVigentes">0</div>
+                    </div>
+                    <div class="kpi-card vencidos">
+                        <div class="etiqueta">Membresías Vencidas</div>
+                        <div class="numero" id="contadorVencidos">0</div>
+                    </div>
+                </div>
+
+                <!-- Búsqueda en tiempo real y Exportación -->
+                <div class="barra-acciones">
+                    <input type="text" id="buscarSocio" placeholder="🔍 Buscar socio por nombre o teléfono...">
+                    <button id="btnExportar" class="btn-accion btn-secundario">📋 Exportar Lista</button>
+                </div>
+
+                <!-- Tabla de Socios -->
+                <div class="contenedor-tabla">
+                    <table class="tabla-socios">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Teléfono</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Vencimiento</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listaSocios">
+                            <!-- Filas generadas dinámicamente por socios.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Formulario para Registrar Nuevo Socio -->
+                <h3 style="color: var(--white); margin-top: 30px; margin-bottom: 10px; font-size: 1.2rem;">Registrar Nuevo Socio</h3>
+                <form id="formSocio">
+                    <div class="formulario-registro">
+                        <div class="campo-form">
+                            <label for="nombreSocio">Nombre Completo</label>
+                            <input type="text" id="nombreSocio" placeholder="Ej. Juan Pérez" required>
+                        </div>
+                        <div class="campo-form">
+                            <label for="telefonoSocio">Teléfono</label>
+                            <input type="tel" id="telefonoSocio" placeholder="10 dígitos" required>
+                        </div>
+                        <div class="campo-form">
+                            <label for="fechaInicio">Fecha de Inicio</label>
+                            <input type="date" id="fechaInicio" required>
+                        </div>
+                        <div class="campo-form">
+                            <label for="fechaVencimiento">Fecha de Vencimiento</label>
+                            <input type="date" id="fechaVencimiento" required>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; text-align: right;">
+                        <button type="submit" class="btn-accion btn-primario">+ Registrar Socio</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de lógica de socios -->
+    <script src="socios.js"></script>
+</body>
+</html>
