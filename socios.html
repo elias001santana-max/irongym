@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+       <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -391,6 +391,14 @@
 
             btnEliminar.addEventListener("click", function () {
                 if (confirm("¿Seguro que deseas eliminar este socio?")) {
+                    const clave = obtenerClaveSocio(fila);
+                    const eliminados = obtenerSociosEliminados();
+
+                    if (!eliminados.includes(clave)) {
+                        eliminados.push(clave);
+                        guardarSociosEliminados(eliminados);
+                    }
+
                     fila.remove();
                     actualizarContadoresSocios();
                 }
@@ -399,6 +407,26 @@
             celdaAcciones.appendChild(btnEditar);
             celdaAcciones.appendChild(btnEliminar);
             fila.appendChild(celdaAcciones);
+        }
+
+        // Guarda los socios eliminados para que no vuelvan a aparecer al entrar otra vez.
+        function obtenerClaveSocio(fila) {
+            const celdas = fila.querySelectorAll("td");
+            return Array.from(celdas).slice(0, 4)
+                .map(celda => celda.textContent.trim().toLowerCase())
+                .join("|");
+        }
+
+        function obtenerSociosEliminados() {
+            try {
+                return JSON.parse(localStorage.getItem("ironGymSociosEliminados") || "[]");
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function guardarSociosEliminados(socios) {
+            localStorage.setItem("ironGymSociosEliminados", JSON.stringify(socios));
         }
 
         function actualizarContadoresSocios() {
@@ -418,9 +446,20 @@
         }
 
         function revisarFilasSocios() {
+            const eliminados = obtenerSociosEliminados();
+
             tablaSocios.querySelectorAll("tr").forEach(function (fila) {
-                if (fila.cells.length >= 5) agregarBotonesAccion(fila);
+                if (fila.cells.length >= 5) {
+                    // Si el socio ya fue eliminado antes, no volver a mostrarlo.
+                    if (eliminados.includes(obtenerClaveSocio(fila))) {
+                        fila.remove();
+                        return;
+                    }
+                    agregarBotonesAccion(fila);
+                }
             });
+
+            actualizarContadoresSocios();
         }
 
         revisarFilasSocios();
