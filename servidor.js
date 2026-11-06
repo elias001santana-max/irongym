@@ -3,14 +3,17 @@ const mysql = require("mysql2/promise");
 const bcrypt = require("bcryptjs");
 const path = require("path");
 
-// ====== CONFIGURACIÓN (valores por defecto de XAMPP) ======
+// ====== CONFIGURACIÓN PARA RAILWAY Y LOCAL ======
 const CONFIG_MYSQL = {
-    host: "localhost",
-    user: "root",
-    password: ""
+    host: process.env.MYSQLHOST || "localhost",
+    user: process.env.MYSQLUSER || "root",
+    password: process.env.MYSQLPASSWORD || "",
+    database: process.env.MYSQLDATABASE || "iron_gym",
+    port: process.env.MYSQLPORT || 3306
 };
-const NOMBRE_BD = process.env.DB_NAME || "iron_gym";
-const PUERTO = 3000;
+
+// Railway asigna un puerto automático, si no existe usa el 3000 para tu PC
+const PUERTO = process.env.PORT || 3000;
 // ===========================================================
 
 const app = express();
@@ -30,14 +33,20 @@ let pool;
 
 // Crea la base de datos y la tabla si no existen
 async function iniciarBaseDeDatos() {
-    const conexion = await mysql.createConnection(CONFIG_MYSQL);
-    await conexion.query(
-        "CREATE DATABASE IF NOT EXISTS `" + NOMBRE_BD + "` " +
-        "CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"
-    );
-    await conexion.end();
-
-    pool = mysql.createPool({ ...CONFIG_MYSQL, database: NOMBRE_BD });
+    // Si estamos en Railway, la base de datos ya está creada en la nube, 
+    // así que nos conectamos directamente usando el pool con las variables de entorno.
+    if (process.env.MYSQLHOST) {
+        pool = mysql.createPool(CONFIG_MYSQL);
+    } else {
+        // En local (XAMPP) creamos la BD si no existe
+        const conexion = await mysql.createConnection(CONFIG_MYSQL);
+        await conexion.query(
+            "CREATE DATABASE IF NOT EXISTS `" + CONFIG_MYSQL.database + "` " +
+            "CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"
+        );
+        await conexion.end();
+        pool = mysql.createPool(CONFIG_MYSQL);
+    }
 
     await pool.query(`
         CREATE TABLE IF NOT EXISTS usuarios (
@@ -117,16 +126,15 @@ app.post("/api/login", async (req, res) => {
     }
 });
 
-// ---------- ARRANQUE ----------
+
 iniciarBaseDeDatos()
     .then(() => {
         app.listen(PUERTO, () => {
-            console.log("Base de datos lista: " + NOMBRE_BD);
-            console.log("Abre en tu navegador: http://localhost:" + PUERTO);
+            console.log("Servidor corriendo en el puerto: " + PUERTO);
         });
     })
     .catch((error) => {
-        console.error("No se pudo conectar a MySQL. ¿Está encendido en XAMPP?");
+        console.error("No se pudo conectar a MySQL.");
         console.error(error.message);
         process.exit(1);
     });
