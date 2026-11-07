@@ -1,4 +1,4 @@
-       <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -306,7 +306,6 @@
                                 <th>Fecha Inicio</th>
                                 <th>Fecha Vencimiento</th>
                                 <th>Estado</th>
-                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="listaSocios">
@@ -346,127 +345,6 @@
 
     <!-- Script de lógica de socios -->
     <script src="socios.js"></script>
-    <script>
-        // Agrega los botones Editar y Eliminar a cada socio de la tabla.
-        const tablaSocios = document.getElementById("listaSocios");
-
-        function agregarBotonesAccion(fila) {
-            if (fila.querySelector(".acciones-socio")) return;
-
-            const celdaAcciones = document.createElement("td");
-            celdaAcciones.className = "acciones-socio";
-            celdaAcciones.style.whiteSpace = "nowrap";
-
-            const btnEditar = document.createElement("button");
-            btnEditar.type = "button";
-            btnEditar.textContent = "Editar";
-            btnEditar.className = "btn-accion btn-primario";
-            btnEditar.style.marginRight = "8px";
-
-            const btnEliminar = document.createElement("button");
-            btnEliminar.type = "button";
-            btnEliminar.textContent = "Eliminar";
-            btnEliminar.className = "btn-accion btn-peligro";
-
-            btnEditar.addEventListener("click", function () {
-                const celdas = fila.querySelectorAll("td");
-                const nombre = prompt("Nombre completo:", celdas[0].textContent.trim());
-                if (nombre === null) return;
-
-                const telefono = prompt("Teléfono:", celdas[1].textContent.trim());
-                if (telefono === null) return;
-
-                const fechaInicio = prompt("Fecha de inicio (AAAA-MM-DD):", celdas[2].textContent.trim());
-                if (fechaInicio === null) return;
-
-                const fechaVencimiento = prompt("Fecha de vencimiento (AAAA-MM-DD):", celdas[3].textContent.trim());
-                if (fechaVencimiento === null) return;
-
-                celdas[0].textContent = nombre.trim();
-                celdas[1].textContent = telefono.trim();
-                celdas[2].textContent = fechaInicio.trim();
-                celdas[3].textContent = fechaVencimiento.trim();
-                alert("Datos del socio actualizados en la tabla.");
-            });
-
-            btnEliminar.addEventListener("click", function () {
-                if (confirm("¿Seguro que deseas eliminar este socio?")) {
-                    const clave = obtenerClaveSocio(fila);
-                    const eliminados = obtenerSociosEliminados();
-
-                    if (!eliminados.includes(clave)) {
-                        eliminados.push(clave);
-                        guardarSociosEliminados(eliminados);
-                    }
-
-                    fila.remove();
-                    actualizarContadoresSocios();
-                }
-            });
-
-            celdaAcciones.appendChild(btnEditar);
-            celdaAcciones.appendChild(btnEliminar);
-            fila.appendChild(celdaAcciones);
-        }
-
-        // Guarda los socios eliminados para que no vuelvan a aparecer al entrar otra vez.
-        function obtenerClaveSocio(fila) {
-            const celdas = fila.querySelectorAll("td");
-            return Array.from(celdas).slice(0, 4)
-                .map(celda => celda.textContent.trim().toLowerCase())
-                .join("|");
-        }
-
-        function obtenerSociosEliminados() {
-            try {
-                return JSON.parse(localStorage.getItem("ironGymSociosEliminados") || "[]");
-            } catch (error) {
-                return [];
-            }
-        }
-
-        function guardarSociosEliminados(socios) {
-            localStorage.setItem("ironGymSociosEliminados", JSON.stringify(socios));
-        }
-
-        function actualizarContadoresSocios() {
-            const filas = Array.from(tablaSocios.querySelectorAll("tr"));
-            let vigentes = 0;
-            let vencidos = 0;
-
-            filas.forEach(function (fila) {
-                const estado = fila.cells[4]?.textContent.toLowerCase() || "";
-                if (estado.includes("vigente") || estado.includes("activo")) vigentes++;
-                else if (estado.includes("vencido")) vencidos++;
-            });
-
-            document.getElementById("contadorTotal").textContent = filas.length;
-            document.getElementById("contadorVigentes").textContent = vigentes;
-            document.getElementById("contadorVencidos").textContent = vencidos;
-        }
-
-        function revisarFilasSocios() {
-            const eliminados = obtenerSociosEliminados();
-
-            tablaSocios.querySelectorAll("tr").forEach(function (fila) {
-                if (fila.cells.length >= 5) {
-                    // Si el socio ya fue eliminado antes, no volver a mostrarlo.
-                    if (eliminados.includes(obtenerClaveSocio(fila))) {
-                        fila.remove();
-                        return;
-                    }
-                    agregarBotonesAccion(fila);
-                }
-            });
-
-            actualizarContadoresSocios();
-        }
-
-        revisarFilasSocios();
-        new MutationObserver(revisarFilasSocios).observe(tablaSocios, {
-            childList: true,
-            subtree: true
-        });
-    </script>
 </body>
 </html>
+
