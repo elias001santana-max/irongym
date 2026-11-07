@@ -466,7 +466,10 @@
                         <div class="campo-form">
                             <label for="nombreSocio">Nombre Completo</label>
                             <input type="text" id="nombreSocio"
-                                placeholder="Ej. Juan Pérez" required>
+    placeholder="Ej. Juan Pérez"
+    pattern="[A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]+"
+    title="El nombre no puede llevar números"
+    required>
                         </div>
 
                         <div class="campo-form">
