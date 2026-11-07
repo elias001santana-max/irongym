@@ -158,7 +158,7 @@ img { max-width: 100%; display: block; }
 #tituloHero { font-size: clamp(46px, 9vw, 96px); line-height: 0.98; text-align: left; max-width: 900px; }
 #tituloHero .accent { color: var(--yellow); }
 
-.hero p.lead { color: var(--gray); font-size: 1.1rem; max-width: 480px; }
+.hero p.lead { color: #d4a600; font-size: 1.1rem; max-width: 480px; }
 
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 6px; }
 
