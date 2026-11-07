@@ -204,7 +204,7 @@ img { max-width: 100%; display: block; }
   display: flex; flex-wrap: wrap; gap: 30px;
   padding: 26px 0 40px;
   border-top: 1px solid rgba(245,245,244,0.15);
-  color: var(--gray); font-size: 0.9rem;
+    color: #d4a600; font-size: 0.9rem;
 }
 .hero-meta strong {
   color: var(--white); display: block; font-size: 0.72rem;
