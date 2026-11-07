@@ -8,10 +8,11 @@
 
     <style>
         .modulo-socios {
-            max-width: 1050px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+    max-width: 1050px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: none;
+}
 
         .tarjeta-panel {
             background-color: var(--panel);
@@ -546,8 +547,9 @@
 
                 ventana.style.display = "none";
 
-                panelSocios.style.display = "block";
+document.querySelector(".modulo-socios").style.display = "block";
 
+panelSocios.style.display = "block";
             }
 
         }, 45);
