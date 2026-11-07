@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 // Las páginas están en la misma carpeta que este archivo
 app.use(express.static(__dirname));
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, "INDEC.html")));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "LOGIN.html")));
 app.get("/index.html", (req, res) => res.sendFile(path.join(__dirname, "INDEC.html")));
 app.get("/LOGIN.html", (req, res) => res.sendFile(path.join(__dirname, "LOGIN.html")));
 app.get("/registro.html", (req, res) => res.sendFile(path.join(__dirname, "registro.html")));
