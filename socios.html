@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iron Gym | Gestión de Socios</title>
     <link rel="stylesheet" href="ESTILOC.css">
+
     <style>
         .modulo-socios {
             max-width: 1050px;
             margin: 40px auto;
             padding: 0 20px;
         }
+
         .tarjeta-panel {
             background-color: var(--panel);
             border: 1px solid var(--panel-line);
@@ -19,6 +21,7 @@
             margin-bottom: 30px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
+
         .encabezado-panel {
             display: flex;
             justify-content: space-between;
@@ -29,11 +32,13 @@
             flex-wrap: wrap;
             gap: 15px;
         }
+
         .encabezado-panel h2 {
             margin: 0;
             color: var(--yellow);
             font-size: 1.8rem;
         }
+
         .user-badge {
             background: #1f1f1f;
             border: 1px solid var(--panel-line);
@@ -42,9 +47,11 @@
             font-size: 0.9rem;
             color: var(--gray);
         }
+
         .user-badge strong {
             color: var(--white);
         }
+
         /* Contadores KPI */
         .grid-kpis {
             display: grid;
@@ -52,6 +59,7 @@
             gap: 15px;
             margin-bottom: 25px;
         }
+
         .kpi-card {
             background: #181818;
             border: 1px solid var(--panel-line);
@@ -59,21 +67,25 @@
             padding: 18px;
             text-align: center;
         }
+
         .kpi-card .numero {
             font-size: 2.2rem;
             font-weight: 800;
             font-family: 'Arial Black', sans-serif;
             margin: 5px 0 0 0;
         }
+
         .kpi-card.total .numero { color: var(--white); }
         .kpi-card.vigentes .numero { color: #28a745; }
         .kpi-card.vencidos .numero { color: #dc3545; }
+
         .kpi-card .etiqueta {
             font-size: 0.85rem;
             color: var(--gray);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
         /* Barra de búsqueda y acciones */
         .barra-acciones {
             display: flex;
@@ -81,6 +93,7 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
+
         .barra-acciones input {
             flex: 1;
             min-width: 250px;
@@ -92,9 +105,11 @@
             font-size: 0.95rem;
             outline: none;
         }
+
         .barra-acciones input:focus {
             border-color: var(--yellow);
         }
+
         /* Botones */
         .btn-accion {
             padding: 12px 20px;
@@ -107,30 +122,37 @@
             text-transform: uppercase;
             letter-spacing: 0.04em;
         }
+
         .btn-primario {
             background: var(--yellow);
             color: #000;
         }
+
         .btn-primario:hover {
             background: #e6be00;
         }
+
         .btn-peligro {
             background: transparent;
             border: 1px solid var(--red);
             color: var(--red);
         }
+
         .btn-peligro:hover {
             background: var(--red);
             color: var(--white);
         }
+
         .btn-secundario {
             background: #2a2a2a;
             color: var(--white);
             border: 1px solid var(--panel-line);
         }
+
         .btn-secundario:hover {
             background: #333;
         }
+
         /* Tabla */
         .contenedor-tabla {
             overflow-x: auto;
@@ -138,11 +160,13 @@
             border-radius: 6px;
             margin-bottom: 30px;
         }
+
         table.tabla-socios {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.95rem;
         }
+
         table.tabla-socios th {
             background: #1b1b1b;
             color: var(--gray);
@@ -153,10 +177,12 @@
             font-size: 0.78rem;
             letter-spacing: 0.05em;
         }
+
         table.tabla-socios td {
             padding: 12px 16px;
             border-bottom: 1px solid var(--panel-line);
         }
+
         /* Formulario registro de socios */
         .formulario-registro {
             display: grid;
@@ -164,16 +190,19 @@
             gap: 15px;
             margin-top: 15px;
         }
+
         .campo-form {
             display: flex;
             flex-direction: column;
             gap: 6px;
         }
+
         .campo-form label {
             color: var(--gray);
             font-size: 0.85rem;
             font-weight: 600;
         }
+
         .campo-form input {
             padding: 10px 14px;
             background: #1c1c1c;
@@ -183,39 +212,11 @@
             outline: none;
             font-size: 0.9rem;
         }
+
         .campo-form input:focus {
             border-color: var(--yellow);
         }
-        /* Vista de Login */
-        .login-box {
-            max-width: 420px;
-            margin: 60px auto;
-            padding: 35px;
-            background: var(--panel);
-            border: 1px solid var(--panel-line);
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-        }
-        .login-box h1 {
-            color: var(--yellow);
-            margin-top: 0;
-            margin-bottom: 8px;
-            font-size: 2rem;
-        }
-        .login-box p {
-            color: var(--gray);
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-        }
-        .login-box .campo-form {
-            text-align: left;
-            margin-bottom: 16px;
-        }
-        .login-box button {
-            width: 100%;
-            margin-top: 10px;
-        }
+
         .nav-enlace-volver {
             color: var(--gray);
             text-decoration: none;
@@ -225,80 +226,227 @@
             margin-bottom: 20px;
             font-size: 0.9rem;
         }
+
         .nav-enlace-volver:hover {
             color: var(--yellow);
         }
+
+        /* PANTALLA DE CARGA BAR.HTML */
+
+        .ventana {
+            width: 900px;
+            height: 560px;
+            background: var(--panel);
+            border: 1px solid var(--panel-line);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            margin: 40px auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .gif-playa {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 390px;
+            object-fit: cover;
+            filter: grayscale(15%);
+        }
+
+        #carga::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 390px;
+            background: linear-gradient(
+                180deg,
+                rgba(10,10,10,0.05),
+                rgba(10,10,10,0.8)
+            );
+            pointer-events: none;
+        }
+
+        .titulo {
+            position: absolute;
+            top: 405px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: var(--yellow);
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-size: 40px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .barra {
+            position: absolute;
+            top: 483px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 431px;
+            height: 45px;
+            background: #262626;
+            border: 1px solid #555;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progreso {
+            width: 0%;
+            height: 100%;
+            background: var(--yellow);
+            transition: width 0.1s linear;
+        }
+
+        .porcentaje {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #0a0a0a;
+        }
+
+        @media (max-width: 920px) {
+            .ventana {
+                width: 95vw;
+                height: 80vh;
+                min-height: 400px;
+            }
+
+            .gif-playa {
+                height: 55%;
+            }
+
+            #carga::after {
+                height: 55%;
+            }
+
+            .titulo {
+                top: 65%;
+                font-size: 32px;
+            }
+
+            .barra {
+                top: 82%;
+                width: 90%;
+                height: 45px;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <div class="grain" aria-hidden="true"></div>
 
     <div class="modulo-socios">
-        <a href="INDEC.html" class="nav-enlace-volver">← Volver al sitio principal</a>
 
-        <!-- VISTA DE LOGIN (formLogin) -->
-        <div id="formLoginContainer">
-            <form id="formLogin" class="login-box">
-                <img src="Logo.png" alt="Iron Gym Logo" style="width: 75px; height: 75px; border-radius: 50%; border: 2px solid var(--yellow); margin-bottom: 12px; object-fit: cover;">
-                <h1>IRON <span style="color: var(--yellow);">GYM</span></h1>
-                <p>Acceso al Panel de Socios</p>
+        <a href="INDEC.html" class="nav-enlace-volver">
+            ← Volver al sitio principal
+        </a>
 
-                <div class="campo-form">
-                    <label for="usuario">Usuario</label>
-                    <input type="text" id="usuario" placeholder="Ej. admin" required>
+        <!-- PANTALLA DE CARGA -->
+
+        <div class="ventana" id="ventana">
+
+            <div id="carga">
+
+                <img
+                    class="gif-playa"
+                    src="fondo.png.jpeg"
+                    alt="Imagen del gimnasio"
+                >
+
+                <h1 class="titulo">Cargando</h1>
+
+                <div class="barra">
+                    <div class="progreso" id="progreso"></div>
+                    <div class="porcentaje" id="porcentaje">0%</div>
                 </div>
 
-                <div class="campo-form">
-                    <label for="contrasena">Contraseña</label>
-                    <input type="password" id="contrasena" placeholder="Contraseña" required>
-                </div>
+            </div>
 
-                <button type="submit" class="btn-accion btn-primario">Iniciar Sesión</button>
-            </form>
         </div>
 
-        <!-- VISTA DEL PANEL (panelSocios) -->
+        <!-- PANEL DE SOCIOS -->
+
         <div id="panelSocios" style="display: none;">
+
             <div class="tarjeta-panel">
+
                 <div class="encabezado-panel">
+
                     <div style="display: flex; align-items: center; gap: 14px;">
-                        <img src="Logo.png" alt="Iron Gym Logo" style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--yellow); object-fit: cover;">
+
+                        <img src="Logo.png" alt="Iron Gym Logo"
+                            style="width: 52px; height: 52px; border-radius: 50%; border: 2px solid var(--yellow); object-fit: cover;">
+
                         <div>
                             <h2>Panel de Socios</h2>
+
                             <div class="user-badge" data-roles="admin,recepcion">
-                                Usuario: <strong id="nombreUsuario">Administrador</strong> (<span id="rolUsuario">admin</span>)
+                                Usuario: <strong id="nombreUsuario">Administrador</strong>
+                                (<span id="rolUsuario">admin</span>)
                             </div>
                         </div>
+
                     </div>
-                    <button id="btnCerrarSesion" class="btn-accion btn-peligro">Cerrar Sesión</button>
+
+                    <button id="btnCerrarSesion" class="btn-accion btn-peligro">
+                        Cerrar Sesión
+                    </button>
+
                 </div>
 
-                <!-- Métricas / Contadores innovación -->
+                <!-- MÉTRICAS -->
+
                 <div class="grid-kpis">
+
                     <div class="kpi-card total">
                         <div class="etiqueta">Total de Socios</div>
                         <div class="numero" id="contadorTotal">0</div>
                     </div>
+
                     <div class="kpi-card vigentes">
                         <div class="etiqueta">Membresías Vigentes</div>
                         <div class="numero" id="contadorVigentes">0</div>
                     </div>
+
                     <div class="kpi-card vencidos">
                         <div class="etiqueta">Membresías Vencidas</div>
                         <div class="numero" id="contadorVencidos">0</div>
                     </div>
+
                 </div>
 
-                <!-- Búsqueda en tiempo real y Exportación -->
+                <!-- BÚSQUEDA -->
+
                 <div class="barra-acciones">
-                    <input type="text" id="buscarSocio" placeholder="🔍 Buscar socio por nombre o teléfono...">
-                    <button id="btnExportar" class="btn-accion btn-secundario">📋 Exportar Lista</button>
+
+                    <input type="text" id="buscarSocio"
+                        placeholder="🔍 Buscar socio por nombre o teléfono...">
+
+                    <button id="btnExportar" class="btn-accion btn-secundario">
+                        📋 Exportar Lista
+                    </button>
+
                 </div>
 
-                <!-- Tabla de Socios -->
+                <!-- TABLA -->
+
                 <div class="contenedor-tabla">
+
                     <table class="tabla-socios">
+
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -309,43 +457,104 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
+
                         <tbody id="listaSocios">
-                            <!-- Filas generadas dinámicamente por socios.js -->
+                            <!-- Filas generadas dinámicamente por el JavaScript -->
                         </tbody>
+
                     </table>
+
                 </div>
 
-                <!-- Formulario para Registrar Nuevo Socio -->
-                <h3 id="tituloFormularioSocio" style="color: var(--white); margin-top: 30px; margin-bottom: 10px; font-size: 1.2rem;">Registrar Nuevo Socio</h3>
+                <!-- FORMULARIO -->
+
+                <h3 id="tituloFormularioSocio"
+                    style="color: var(--white); margin-top: 30px; margin-bottom: 10px; font-size: 1.2rem;">
+                    Registrar Nuevo Socio
+                </h3>
+
                 <form id="formSocio">
+
                     <div class="formulario-registro">
+
                         <div class="campo-form">
                             <label for="nombreSocio">Nombre Completo</label>
-                            <input type="text" id="nombreSocio" placeholder="Ej. Juan Pérez" required>
+                            <input type="text" id="nombreSocio"
+                                placeholder="Ej. Juan Pérez" required>
                         </div>
+
                         <div class="campo-form">
                             <label for="telefonoSocio">Teléfono</label>
-                            <input type="tel" id="telefonoSocio" placeholder="10 dígitos" required>
+                            <input type="tel" id="telefonoSocio"
+                                placeholder="10 dígitos" required>
                         </div>
+
                         <div class="campo-form">
                             <label for="fechaInicio">Fecha de Inicio</label>
                             <input type="date" id="fechaInicio" required>
                         </div>
+
                         <div class="campo-form">
                             <label for="fechaVencimiento">Fecha de Vencimiento</label>
                             <input type="date" id="fechaVencimiento" required>
                         </div>
+
                     </div>
+
                     <div style="margin-top: 20px; text-align: right;">
-                        <button type="submit" class="btn-accion btn-primario">+ Registrar Socio</button>
-                        <button type="button" id="btnCancelarEdicion" class="btn-accion btn-secundario" style="display: none; margin-left: 8px;">Cancelar</button>
+
+                        <button type="submit" class="btn-accion btn-primario">
+                            + Registrar Socio
+                        </button>
+
+                        <button type="button" id="btnCancelarEdicion"
+                            class="btn-accion btn-secundario"
+                            style="display: none; margin-left: 8px;">
+                            Cancelar
+                        </button>
+
                     </div>
+
                 </form>
+
             </div>
+
         </div>
+
     </div>
 
-    <!-- Script de lógica de socios -->
+    <!-- PANTALLA DE CARGA Y APERTURA DEL PANEL -->
+
+    <script>
+        let valor = 0;
+
+        const progreso = document.getElementById("progreso");
+        const porcentaje = document.getElementById("porcentaje");
+        const ventana = document.getElementById("ventana");
+        const panelSocios = document.getElementById("panelSocios");
+
+        const intervalo = setInterval(() => {
+
+            valor++;
+
+            progreso.style.width = valor + "%";
+            porcentaje.textContent = valor + "%";
+
+            if (valor >= 100) {
+
+                clearInterval(intervalo);
+
+                ventana.style.display = "none";
+
+                panelSocios.style.display = "block";
+
+            }
+
+        }, 45);
+    </script>
+
+    <!-- LÓGICA DE SOCIOS -->
     <script src="socios.js"></script>
+
 </body>
 </html>
