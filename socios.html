@@ -8,11 +8,10 @@
 
     <style>
         .modulo-socios {
-    max-width: 1050px;
-    margin: 40px auto;
-    padding: 0 20px;
-    display: none;
-}
+            max-width: 1050px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
 
         .tarjeta-panel {
             background-color: var(--panel);
@@ -53,7 +52,6 @@
             color: var(--white);
         }
 
-        /* Contadores KPI */
         .grid-kpis {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -87,7 +85,6 @@
             letter-spacing: 0.05em;
         }
 
-        /* Barra de búsqueda y acciones */
         .barra-acciones {
             display: flex;
             gap: 15px;
@@ -111,7 +108,6 @@
             border-color: var(--yellow);
         }
 
-        /* Botones */
         .btn-accion {
             padding: 12px 20px;
             border: none;
@@ -154,7 +150,6 @@
             background: #333;
         }
 
-        /* Tabla */
         .contenedor-tabla {
             overflow-x: auto;
             border: 1px solid var(--panel-line);
@@ -184,7 +179,6 @@
             border-bottom: 1px solid var(--panel-line);
         }
 
-        /* Formulario registro de socios */
         .formulario-registro {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -349,38 +343,38 @@
 
     <div class="grain" aria-hidden="true"></div>
 
-    <div class="modulo-socios">
+    <!-- PANTALLA DE CARGA SEPARADA -->
+
+    <div class="ventana" id="ventana">
+
+        <div id="carga">
+
+            <img
+                class="gif-playa"
+                src="fondo.png.jpeg"
+                alt="Imagen del gimnasio"
+            >
+
+            <h1 class="titulo">Cargando</h1>
+
+            <div class="barra">
+                <div class="progreso" id="progreso"></div>
+                <div class="porcentaje" id="porcentaje">0%</div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PANEL DE SOCIOS -->
+
+    <div class="modulo-socios" id="moduloSocios" style="display: none;">
 
         <a href="INDEC.html" class="nav-enlace-volver">
             ← Volver al sitio principal
         </a>
 
-        <!-- PANTALLA DE CARGA -->
-
-        <div class="ventana" id="ventana">
-
-            <div id="carga">
-
-                <img
-                    class="gif-playa"
-                    src="fondo.png.jpeg"
-                    alt="Imagen del gimnasio"
-                >
-
-                <h1 class="titulo">Cargando</h1>
-
-                <div class="barra">
-                    <div class="progreso" id="progreso"></div>
-                    <div class="porcentaje" id="porcentaje">0%</div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- PANEL DE SOCIOS -->
-
-        <div id="panelSocios" style="display: none;">
+        <div id="panelSocios">
 
             <div class="tarjeta-panel">
 
@@ -408,8 +402,6 @@
 
                 </div>
 
-                <!-- MÉTRICAS -->
-
                 <div class="grid-kpis">
 
                     <div class="kpi-card total">
@@ -429,8 +421,6 @@
 
                 </div>
 
-                <!-- BÚSQUEDA -->
-
                 <div class="barra-acciones">
 
                     <input type="text" id="buscarSocio"
@@ -441,8 +431,6 @@
                     </button>
 
                 </div>
-
-                <!-- TABLA -->
 
                 <div class="contenedor-tabla">
 
@@ -460,14 +448,11 @@
                         </thead>
 
                         <tbody id="listaSocios">
-                            <!-- Filas generadas dinámicamente por el JavaScript -->
                         </tbody>
 
                     </table>
 
                 </div>
-
-                <!-- FORMULARIO -->
 
                 <h3 id="tituloFormularioSocio"
                     style="color: var(--white); margin-top: 30px; margin-bottom: 10px; font-size: 1.2rem;">
@@ -532,7 +517,7 @@
         const progreso = document.getElementById("progreso");
         const porcentaje = document.getElementById("porcentaje");
         const ventana = document.getElementById("ventana");
-        const panelSocios = document.getElementById("panelSocios");
+        const moduloSocios = document.getElementById("moduloSocios");
 
         const intervalo = setInterval(() => {
 
@@ -547,9 +532,8 @@
 
                 ventana.style.display = "none";
 
-document.querySelector(".modulo-socios").style.display = "block";
+                moduloSocios.style.display = "block";
 
-panelSocios.style.display = "block";
             }
 
         }, 45);
@@ -560,3 +544,4 @@ panelSocios.style.display = "block";
 
 </body>
 </html>
+
