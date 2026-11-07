@@ -678,4 +678,116 @@ footer { padding: 4rem 0 0; border-bottom: none; }
 .resumen-precio { flex: none; font-weight: 700; font-size: 0.88rem; color: var(--yellow); }
 
 .pedido-resumen .pedido-total { margin-top: 16px; }
-.resumen-instruccion { padding-top: 12px; border-top: 1px solid var(--panel-line); color: var(--white); }
+.resumen-instruccion { padding-top: 12px; border-top: 1px solid var(--panel-line); color: var(--white); 
+
+/* PANTALLA DE CARGA DE BAR.HTML */
+
+.ventana {
+    width: 900px;
+    height: 560px;
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    margin: 40px auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.gif-playa {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 390px;
+    object-fit: cover;
+    filter: grayscale(15%);
+}
+
+#carga::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 390px;
+    background: linear-gradient(
+        180deg,
+        rgba(10,10,10,0.05),
+        rgba(10,10,10,0.8)
+    );
+    pointer-events: none;
+}
+
+.titulo {
+    position: absolute;
+    top: 405px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: var(--yellow);
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.barra {
+    position: absolute;
+    top: 483px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 431px;
+    height: 45px;
+    background: #262626;
+    border: 1px solid #555;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progreso {
+    width: 0%;
+    height: 100%;
+    background: var(--yellow);
+    transition: width 0.1s linear;
+}
+
+.porcentaje {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: #0a0a0a;
+}
+
+@media (max-width: 920px) {
+    .ventana {
+        width: 95vw;
+        height: 80vh;
+        min-height: 400px;
+    }
+
+    .gif-playa {
+        height: 55%;
+    }
+
+    #carga::after {
+        height: 55%;
+    }
+
+    .titulo {
+        top: 65%;
+        font-size: 32px;
+    }
+
+    .barra {
+        top: 82%;
+        width: 90%;
+        height: 45px;
+    }
+}
+}
